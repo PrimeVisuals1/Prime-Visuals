@@ -302,7 +302,14 @@
             <div class="form-group"><label>Likes</label><input type="number" id="vLikes" placeholder="25000" min="0"></div>
             <div class="form-group"><label>Comments</label><input type="number" id="vComments" placeholder="1200" min="0"></div>
         </div>
-        <div class="form-group"><label>Video URL (optional)</label><input type="url" id="vUrl" placeholder="https://..."></div>
+        <div class="form-group">
+            <label>Video URL — YouTube or Vimeo only (plays inline)</label>
+            <input type="url" id="vUrl" placeholder="https://youtu.be/abc123  or  https://vimeo.com/123456">
+            <small style="color:var(--text-dim);font-size:0.8rem;margin-top:0.4rem;display:block">
+                ✅ YouTube Shorts, youtube.com/watch, youtu.be, vimeo.com &nbsp;|&nbsp;
+                ❌ Instagram, TikTok (blocked by those platforms)
+            </small>
+        </div>
         <div class="form-group"><label>Description</label><textarea id="vDescription" placeholder="Brief description of the video…" rows="3"></textarea></div>
         <div class="modal-actions">
             <button class="btn btn-secondary btn-sm" onclick="closeModal('videoModal')">Cancel</button>
@@ -392,12 +399,12 @@
      FIREBASE + APP LOGIC
 ═══════════════════════════════════════════════════════════ -->
 <script type="module">
-import { initializeApp }                  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp }                  from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
-                                           from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+                                           from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 import { getFirestore, collection, doc, getDocs, getDoc,
          addDoc, updateDoc, deleteDoc, setDoc, serverTimestamp, query, orderBy }
-                                           from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+                                           from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 import { FIREBASE_CONFIG }                from './firebase-config.js';
 
 // ── INIT ──────────────────────────────────────────────────────────────
