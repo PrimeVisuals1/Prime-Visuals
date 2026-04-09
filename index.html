@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShortForm Pro - Short-Form Video Editing Specialist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0e27;
+            --secondary: #141829;
+            --tertiary: #1f2641;
+            --accent: #00d9ff;
+            --accent-dark: #00a8cc;
+            --success: #00ff88;
+            --warning: #ffaa00;
+            --danger: #ff3366;
+            --text: #f0f4ff;
+            --text-dim: #a0aacf;
+            --border: #2a2f4a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        /* GLOBAL STYLES */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: var(--primary);
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 217, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1.2rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .admin-btn {
+            font-size: 0.85rem;
+            padding: 0.6rem 1.2rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 70px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-40px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+        }
+
+        /* PORTFOLIO SECTION */
+        .portfolio {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-header h2 .highlight {
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            position: relative;
+            aspect-ratio: 9 / 16;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--secondary);
+            cursor: pointer;
+            group: true;
+            transition: all 0.3s;
+        }
+
+        .video-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .video-card:hover .video-thumbnail {
+            transform: scale(1.05);
+        }
+
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 14, 39, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .video-card:hover .video-overlay {
+            transform: translateY(0);
+        }
+
+        .video-overlay h3 {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-stats {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 1rem;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-icon {
+            color: var(--success);
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 217, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 3;
+        }
+
+        .video-card:hover .play-btn {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-btn::after {
+            content: '▶';
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-left: 3px;
+        }
+
+        /* STATS SECTION */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .stat-card {
+            background: var(--secondary);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* TESTIMONIALS */
+        .testimonials {
+            padding: 6rem 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--secondary);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .stars {
+            color: var(--warning);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .author-info h4 {
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        /* PRICING */
+        .pricing {
+            padding: 6rem 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--secondary);
+            padding: 2.5rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(0, 255, 136, 0.05));
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .pricing-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-desc {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-period {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.6rem 0;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--success);
+            margin-right: 0.8rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .pricing-card .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--secondary);
+            border-top: 1px solid var(--border);
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        /* ADMIN PANEL */
+        .admin-panel {
+            display: none;
+            min-height: 100vh;
+            background: var(--primary);
+            margin-top: 70px;
+        }
+
+        .admin-panel.active {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+        }
+
+        .admin-sidebar {
+            background: var(--secondary);
+            border-right: 1px solid var(--border);
+            padding: 2rem 0;
+            position: fixed;
+            height: calc(100vh - 70px);
+            width: 250px;
+            overflow-y: auto;
+        }
+
+        .admin-sidebar ul {
+            list-style: none;
+        }
+
+        .admin-sidebar li {
+            padding: 0;
+        }
+
+        .admin-sidebar a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            font-weight: 500;
+        }
+
+        .admin-sidebar a:hover,
+        .admin-sidebar a.active {
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+
+        .admin-content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .admin-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        /* DASHBOARD */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-card {
+            background: var(--secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .card-label {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-change {
+            font-size: 0.85rem;
+            color: var(--success);
+        }
+
+        .card-change.negative {
+            color: var(--danger);
+        }
+
+        /* ANALYTICS CHARTS */
+        .chart-container {
+            background: var(--secondary);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .chart-bar {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 200px;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 0 1rem;
+        }
+
+        .bar {
+            flex: 1;
+            background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+            border-radius: 4px 4px 0 0;
+            min-height: 10px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .bar:hover {
+            opacity: 0.8;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            white-space: nowrap;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* VIDEOS TABLE */
+        .videos-table {
+            background: var(--secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 0.5fr;
+            gap: 1rem;
+            background: var(--tertiary);
+            padding: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 0.5fr;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            align-items: center;
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .table-row:hover {
+            background: rgba(0, 217, 255, 0.05);
+        }
+
+        .video-title {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .table-metric {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .metric-green {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .metric-orange {
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        /* FEEDBACK */
+        .feedback-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .feedback-item {
+            background: var(--secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .feedback-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .feedback-name {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .feedback-date {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        .feedback-rating {
+            color: var(--warning);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .feedback-text {
+            color: var(--text-dim);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .feedback-type {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .feedback-type.positive {
+            background: var(--success);
+        }
+
+        .feedback-type.neutral {
+            background: var(--warning);
+        }
+
+        .feedback-type.negative {
+            background: var(--danger);
+        }
+
+        /* FORMS */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'Outfit', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                margin-top: 60px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .admin-panel.active {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                display: flex;
+                gap: 1rem;
+                overflow-x: auto;
+                padding: 1rem;
+            }
+
+            .admin-sidebar ul {
+                display: flex;
+                gap: 1rem;
+            }
+
+            .admin-sidebar li {
+                flex-shrink: 0;
+            }
+
+            .admin-sidebar a {
+                padding: 0.5rem 1rem;
+                border-left: none;
+                border-bottom: 3px solid transparent;
+            }
+
+            .admin-sidebar a.active {
+                border-left: none;
+                border-bottom-color: var(--accent);
+            }
+
+            .admin-content {
+                margin-left: 0;
+            }
+
+            .table-header,
+            .table-row {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">▶ SHORTFORM PRO</div>
+                <ul>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+                <div class="nav-right">
+                    <button class="btn btn-secondary btn-sm" onclick="toggleAdminLogin()">Admin</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PUBLIC WEBSITE -->
+    <div class="public-site">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Short-Form Video <span class="highlight">Editing Specialist</span></h1>
+                <p>TikTok • Instagram Reels • YouTube Shorts • Expert editing that drives engagement and conversions</p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary" onclick="scrollToSection('portfolio')">View Portfolio</button>
+                    <button class="btn btn-secondary">Hire Me</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO -->
+        <section class="portfolio" id="portfolio">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Recent <span class="highlight">Work</span></h2>
+                    <p>Showcasing high-performing short-form content across platforms</p>
+                </div>
+                <div class="portfolio-grid" id="portfolioGrid"></div>
+            </div>
+        </section>
+
+        <!-- STATS -->
+        <section class="stats">
+            <div class="container" style="grid-column: 1 / -1;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                    <div class="stat-card">
+                        <div class="stat-number" id="statsVideos">150+</div>
+                        <div class="stat-label">Videos Delivered</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="statsViews">50M+</div>
+                        <div class="stat-label">Total Views</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="statsClients">30+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="statsEngagement">12%</div>
+                        <div class="stat-label">Avg Engagement</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Client <span class="highlight">Feedback</span></h2>
+                    <p>What my clients are saying about working with me</p>
+                </div>
+                <div class="testimonials-grid" id="testimonialsGrid"></div>
+            </div>
+        </section>
+
+        <!-- PRICING -->
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Simple <span class="highlight">Pricing</span></h2>
+                    <p>Choose the package that fits your needs</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-name">Starter</div>
+                        <div class="pricing-desc">Perfect for emerging creators</div>
+                        <div class="pricing-amount">₹5,000</div>
+                        <div class="pricing-period">per project (5-10 min)</div>
+                        <ul class="pricing-features">
+                            <li>Basic color grading</li>
+                            <li>Sound design</li>
+                            <li>Quick captions</li>
+                            <li>1 revision</li>
+                            <li>3-day delivery</li>
+                        </ul>
+                        <button class="btn btn-secondary" onclick="contactMe()">Get Started</button>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="pricing-badge">Most Popular</div>
+                        <div class="pricing-name">Professional</div>
+                        <div class="pricing-desc">For scaling channels & brands</div>
+                        <div class="pricing-amount">₹15,000</div>
+                        <div class="pricing-period">per month (10-20 videos)</div>
+                        <ul class="pricing-features">
+                            <li>Cinematic color grading</li>
+                            <li>Professional sound mix</li>
+                            <li>Custom captions & effects</li>
+                            <li>Unlimited revisions</li>
+                            <li>24-hour turnaround</li>
+                            <li>Strategy consultation</li>
+                        </ul>
+                        <button class="btn btn-primary" onclick="contactMe()">Start Trial</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="pricing-name">Enterprise</div>
+                        <div class="pricing-desc">High-volume production</div>
+                        <div class="pricing-amount">Custom</div>
+                        <div class="pricing-period">contact for pricing</div>
+                        <ul class="pricing-features">
+                            <li>Unlimited monthly videos</li>
+                            <li>Premium effects & VFX</li>
+                            <li>Dedicated account manager</li>
+                            <li>Priority support</li>
+                            <li>Rush delivery available</li>
+                            <li>Custom workflows</li>
+                        </ul>
+                        <button class="btn btn-secondary" onclick="contactMe()">Get Quote</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>ShortForm Pro</h4>
+                        <p style="color: var(--text-dim); line-height: 1.8;">Professional short-form video editing for creators and brands. Based in India, serving global clients.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#portfolio">Portfolio</a></li>
+                            <li><a href="#testimonials">Reviews</a></li>
+                            <li><a href="#pricing">Pricing</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">YouTube</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Email</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 ShortForm Pro. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ADMIN LOGIN -->
+    <div class="modal" id="adminLoginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Admin Login</h3>
+                <button class="modal-close" onclick="toggleAdminLogin()">×</button>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="adminPassword" placeholder="Enter admin password">
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="adminLogin()">Login</button>
+            <p style="text-align: center; color: var(--text-dim); font-size: 0.85rem; margin-top: 1rem;">Default: admin123</p>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-sidebar">
+            <ul>
+                <li><a href="#" class="admin-nav active" onclick="showAdminSection('dashboard')">📊 Dashboard</a></li>
+                <li><a href="#" class="admin-nav" onclick="showAdminSection('videos')">📹 Videos</a></li>
+                <li><a href="#" class="admin-nav" onclick="showAdminSection('analytics')">📈 Analytics</a></li>
+                <li><a href="#" class="admin-nav" onclick="showAdminSection('feedback')">💬 Feedback</a></li>
+                <li><a href="#" class="admin-nav" onclick="showAdminSection('settings')">⚙️ Settings</a></li>
+                <li><a href="#" class="admin-nav" onclick="logoutAdmin()">🚪 Logout</a></li>
+            </ul>
+        </div>
+
+        <div class="admin-content">
+            <!-- DASHBOARD -->
+            <div id="dashboard-section" class="admin-section">
+                <div class="admin-header">
+                    <h2>Dashboard</h2>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-label">Total Videos</div>
+                        <div class="card-value" id="dashTotalVideos">0</div>
+                        <div class="card-change">+12% this month</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-label">Total Views</div>
+                        <div class="card-value" id="dashTotalViews">0</div>
+                        <div class="card-change">+28% this month</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-label">Total Engagement</div>
+                        <div class="card-value" id="dashEngagement">0</div>
+                        <div class="card-change">+5% this month</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-label">Client Feedback Score</div>
+                        <div class="card-value" id="dashFeedbackScore">0</div>
+                        <div class="card-change">Excellent</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">Views Per Video (Last 6 Videos)</div>
+                    <div class="chart-bar" id="viewsChart"></div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">Engagement Rate by Platform</div>
+                    <div class="chart-bar" id="platformChart"></div>
+                </div>
+            </div>
+
+            <!-- VIDEOS -->
+            <div id="videos-section" class="admin-section hidden">
+                <div class="admin-header">
+                    <h2>Videos Management</h2>
+                    <button class="btn btn-primary btn-sm" onclick="showAddVideoForm()">+ Add Video</button>
+                </div>
+
+                <div class="videos-table">
+                    <div class="table-header">
+                        <div>Title</div>
+                        <div>Platform</div>
+                        <div>Views</div>
+                        <div>Likes</div>
+                        <div>Engagement</div>
+                        <div></div>
+                    </div>
+                    <div id="videosTableBody"></div>
+                </div>
+            </div>
+
+            <!-- ANALYTICS -->
+            <div id="analytics-section" class="admin-section hidden">
+                <div class="admin-header">
+                    <h2>Analytics & Performance</h2>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">Weekly Performance Trend</div>
+                    <div class="chart-bar" id="weeklyTrendChart"></div>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">Platform Distribution</div>
+                    <div class="chart-bar" id="platformDistChart"></div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div class="dashboard-card">
+                        <div class="card-label">Best Performing Video</div>
+                        <div class="card-value" id="bestVideoTitle" style="font-size: 1.2rem; margin-top: 0.5rem;">N/A</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-label">Best Platform</div>
+                        <div class="card-value" id="bestPlatform" style="font-size: 1.8rem; margin-top: 0.5rem;">TikTok</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="card-label">Avg Video Performance</div>
+                        <div class="card-value" id="avgPerformance" style="font-size: 1.2rem; margin-top: 0.5rem;">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FEEDBACK -->
+            <div id="feedback-section" class="admin-section hidden">
+                <div class="admin-header">
+                    <h2>Client Feedback</h2>
+                </div>
+
+                <div class="feedback-list" id="feedbackList"></div>
+            </div>
+
+            <!-- SETTINGS -->
+            <div id="settings-section" class="admin-section hidden">
+                <div class="admin-header">
+                    <h2>Settings</h2>
+                </div>
+
+                <div class="chart-container">
+                    <h3 style="margin-bottom: 1.5rem;">Profile Settings</h3>
+                    <div class="form-group">
+                        <label>Business Name</label>
+                        <input type="text" id="businessName" placeholder="Your business name">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="businessEmail" placeholder="Your email">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" id="businessPhone" placeholder="Your phone">
+                    </div>
+                    <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+                </div>
+
+                <div class="chart-container" style="margin-top: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem;">Admin Password</h3>
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input type="password" id="currentPassword" placeholder="Enter current password">
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password">
+                    </div>
+                    <button class="btn btn-primary" onclick="changePassword()">Change Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD VIDEO MODAL -->
+    <div class="modal" id="addVideoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Video</h3>
+                <button class="modal-close" onclick="closeAddVideoForm()">×</button>
+            </div>
+            <div class="form-group">
+                <label>Video Title</label>
+                <input type="text" id="videoTitle" placeholder="e.g., Motivational Gym Edit">
+            </div>
+            <div class="form-group">
+                <label>Platform</label>
+                <select id="videoPlatform">
+                    <option>TikTok</option>
+                    <option>Instagram Reels</option>
+                    <option>YouTube Shorts</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Views</label>
+                <input type="number" id="videoViews" placeholder="e.g., 50000">
+            </div>
+            <div class="form-group">
+                <label>Likes</label>
+                <input type="number" id="videoLikes" placeholder="e.g., 5000">
+            </div>
+            <div class="form-group">
+                <label>Comments</label>
+                <input type="number" id="videoComments" placeholder="e.g., 500">
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="saveVideo()">Add Video</button>
+        </div>
+    </div>
+
+    <script>
+        // DATA STORAGE
+        const store = {
+            videos: [],
+            feedback: [],
+            settings: {
+                adminPassword: 'admin123',
+                businessName: 'ShortForm Pro',
+                businessEmail: 'hello@shortformpro.in',
+                businessPhone: '+91 98765 43210'
+            }
+        };
+
+        // LOAD DATA FROM STORAGE
+        function loadData() {
+            const saved = localStorage.getItem('shortformProData');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                store.videos = parsed.videos || [];
+                store.feedback = parsed.feedback || [];
+                store.settings = { ...store.settings, ...parsed.settings };
+            } else {
+                initializeSampleData();
+            }
+        }
+
+        // INITIALIZE SAMPLE DATA
+        function initializeSampleData() {
+            store.videos = [
+                { id: 1, title: 'Gym Motivation Edit', platform: 'TikTok', views: 125000, likes: 12500, comments: 1250 },
+                { id: 2, title: 'Crypto Trading Tips', platform: 'Instagram Reels', views: 89000, likes: 8900, comments: 890 },
+                { id: 3, title: 'Productivity Hacks', platform: 'YouTube Shorts', views: 156000, likes: 15600, comments: 1560 },
+                { id: 4, title: 'Morning Routine', platform: 'TikTok', views: 203000, likes: 20300, comments: 2030 },
+                { id: 5, title: 'Success Stories', platform: 'Instagram Reels', views: 98000, likes: 9800, comments: 980 },
+                { id: 6, title: 'Finance Tips', platform: 'YouTube Shorts', views: 167000, likes: 16700, comments: 1670 }
+            ];
+
+            store.feedback = [
+                { id: 1, name: 'Rahul Joshi', rating: 5, text: 'Absolutely amazing work! The editing is crisp and the engagement rate jumped by 200%.', type: 'positive' },
+                { id: 2, name: 'Priya Sharma', rating: 5, text: 'Best investment for my channel. Highly professional and quick turnaround.', type: 'positive' },
+                { id: 3, name: 'Arun Kumar', rating: 4, text: 'Great editing quality. Minor delay in one project but overall very satisfied.', type: 'neutral' },
+                { id: 4, name: 'Deepak Singh', rating: 5, text: 'The captions and effects are perfectly synced. Viral content guaranteed!', type: 'positive' },
+            ];
+
+            saveData();
+        }
+
+        // SAVE DATA
+        function saveData() {
+            localStorage.setItem('shortformProData', JSON.stringify(store));
+        }
+
+        // UI FUNCTIONS
+        function toggleAdminLogin() {
+            document.getElementById('adminLoginModal').classList.toggle('active');
+        }
+
+        function adminLogin() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === store.settings.adminPassword) {
+                document.getElementById('adminLoginModal').classList.remove('active');
+                document.getElementById('adminPanel').classList.add('active');
+                document.querySelector('.public-site').style.display = 'none';
+                updateAdminPanel();
+            } else {
+                alert('Invalid password');
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('adminPanel').classList.remove('active');
+            document.querySelector('.public-site').style.display = 'block';
+            document.getElementById('adminPassword').value = '';
+        }
+
+        function showAdminSection(section) {
+            document.querySelectorAll('.admin-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(section + '-section').classList.remove('hidden');
+            
+            document.querySelectorAll('.admin-nav').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (section === 'dashboard') updateDashboard();
+            if (section === 'videos') updateVideosTable();
+            if (section === 'analytics') updateAnalytics();
+            if (section === 'feedback') updateFeedbackSection();
+        }
+
+        // UPDATE DASHBOARD
+        function updateAdminPanel() {
+            updateDashboard();
+            updatePortfolioGrid();
+            updateTestimonialsGrid();
+        }
+
+        function updateDashboard() {
+            const totalViews = store.videos.reduce((sum, v) => sum + v.views, 0);
+            const totalLikes = store.videos.reduce((sum, v) => sum + v.likes, 0);
+            const avgEngagement = store.videos.length > 0 ? 
+                ((totalLikes / (totalViews || 1)) * 100).toFixed(2) : 0;
+
+            document.getElementById('dashTotalVideos').textContent = store.videos.length;
+            document.getElementById('dashTotalViews').textContent = (totalViews / 1000000).toFixed(1) + 'M';
+            document.getElementById('dashEngagement').textContent = avgEngagement + '%';
+
+            const avgRating = store.feedback.length > 0 ?
+                (store.feedback.reduce((sum, f) => sum + f.rating, 0) / store.feedback.length).toFixed(1) : 0;
+            document.getElementById('dashFeedbackScore').textContent = avgRating + '★';
+
+            // Views chart
+            const chartHtml = store.videos.map(v => {
+                const maxViews = Math.max(...store.videos.map(v => v.views));
+                const height = (v.views / maxViews) * 100;
+                return `
+                    <div class="bar" style="height: ${height}%;">
+                        <div class="bar-value">${(v.views / 1000).toFixed(0)}K</div>
+                        <div class="bar-label">${v.title.substring(0, 10)}</div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('viewsChart').innerHTML = chartHtml;
+
+            // Platform chart
+            const platforms = ['TikTok', 'Instagram Reels', 'YouTube Shorts'];
+            const platformViews = platforms.map(p => {
+                const total = store.videos.filter(v => v.platform === p)
+                    .reduce((sum, v) => sum + v.views, 0);
+                return { platform: p, views: total };
+            });
+            const maxPlatformViews = Math.max(...platformViews.map(p => p.views));
+            const platformChartHtml = platformViews.map(p => {
+                const height = (p.views / (maxPlatformViews || 1)) * 100;
+                return `
+                    <div class="bar" style="height: ${height}%;">
+                        <div class="bar-value">${(p.views / 1000).toFixed(0)}K</div>
+                        <div class="bar-label">${p.platform}</div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('platformChart').innerHTML = platformChartHtml;
+        }
+
+        // UPDATE VIDEOS TABLE
+        function updateVideosTable() {
+            const tableBody = document.getElementById('videosTableBody');
+            tableBody.innerHTML = store.videos.map(v => {
+                const engagement = ((v.likes / v.views) * 100).toFixed(2);
+                return `
+                    <div class="table-row">
+                        <div class="video-title">${v.title}</div>
+                        <div class="table-metric">${v.platform}</div>
+                        <div class="table-metric metric-green">${(v.views / 1000).toFixed(0)}K</div>
+                        <div class="table-metric metric-orange">${(v.likes / 1000).toFixed(1)}K</div>
+                        <div class="table-metric metric-green">${engagement}%</div>
+                        <div>
+                            <button class="btn btn-sm btn-secondary" onclick="deleteVideo(${v.id})" style="font-size: 0.8rem;">Delete</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // UPDATE ANALYTICS
+        function updateAnalytics() {
+            const weeklyData = [
+                { day: 'Mon', views: 120000 },
+                { day: 'Tue', views: 145000 },
+                { day: 'Wed', views: 167000 },
+                { day: 'Thu', views: 156000 },
+                { day: 'Fri', views: 189000 },
+                { day: 'Sat', views: 203000 },
+                { day: 'Sun', views: 198000 }
+            ];
+
+            const maxWeekly = Math.max(...weeklyData.map(d => d.views));
+            const weeklyChartHtml = weeklyData.map(d => {
+                const height = (d.views / maxWeekly) * 100;
+                return `
+                    <div class="bar" style="height: ${height}%;">
+                        <div class="bar-value">${(d.views / 1000).toFixed(0)}K</div>
+                        <div class="bar-label">${d.day}</div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('weeklyTrendChart').innerHTML = weeklyChartHtml;
+
+            const platforms = ['TikTok', 'Instagram Reels', 'YouTube Shorts'];
+            const platformDist = platforms.map(p => {
+                const count = store.videos.filter(v => v.platform === p).length;
+                return { platform: p, count: count };
+            });
+            const maxCount = Math.max(...platformDist.map(p => p.count));
+            const platformDistChartHtml = platformDist.map(p => {
+                const height = (p.count / (maxCount || 1)) * 100;
+                return `
+                    <div class="bar" style="height: ${height}%;">
+                        <div class="bar-value">${p.count}</div>
+                        <div class="bar-label">${p.platform}</div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('platformDistChart').innerHTML = platformDistChartHtml;
+
+            // Best video
+            const bestVideo = store.videos.reduce((prev, current) => 
+                prev.views > current.views ? prev : current, store.videos[0]);
+            document.getElementById('bestVideoTitle').textContent = bestVideo?.title || 'N/A';
+
+            // Best platform
+            const platformViews = platforms.map(p => ({
+                platform: p,
+                views: store.videos.filter(v => v.platform === p).reduce((sum, v) => sum + v.views, 0)
+            }));
+            const bestPlatform = platformViews.reduce((prev, current) => 
+                prev.views > current.views ? prev : current, platformViews[0]);
+            document.getElementById('bestPlatform').textContent = bestPlatform?.platform || 'N/A';
+
+            // Avg performance
+            const avgViews = store.videos.length > 0 ? 
+                (store.videos.reduce((sum, v) => sum + v.views, 0) / store.videos.length / 1000).toFixed(0) + 'K' : 'N/A';
+            document.getElementById('avgPerformance').textContent = avgViews;
+        }
+
+        // UPDATE FEEDBACK SECTION
+        function updateFeedbackSection() {
+            const feedbackList = document.getElementById('feedbackList');
+            feedbackList.innerHTML = store.feedback.map(f => `
+                <div class="feedback-item">
+                    <div class="feedback-header">
+                        <div>
+                            <div class="feedback-name">${f.name}</div>
+                            <div class="feedback-date">Recently</div>
+                        </div>
+                        <div class="feedback-rating">${'★'.repeat(f.rating)}</div>
+                    </div>
+                    <p class="feedback-text">"${f.text}"</p>
+                    <span class="feedback-type ${f.type}">${f.type}</span>
+                </div>
+            `).join('');
+        }
+
+        // VIDEO MANAGEMENT
+        function showAddVideoForm() {
+            document.getElementById('addVideoModal').classList.add('active');
+        }
+
+        function closeAddVideoForm() {
+            document.getElementById('addVideoModal').classList.remove('active');
+            document.getElementById('videoTitle').value = '';
+            document.getElementById('videoViews').value = '';
+            document.getElementById('videoLikes').value = '';
+            document.getElementById('videoComments').value = '';
+        }
+
+        function saveVideo() {
+            const video = {
+                id: Date.now(),
+                title: document.getElementById('videoTitle').value,
+                platform: document.getElementById('videoPlatform').value,
+                views: parseInt(document.getElementById('videoViews').value) || 0,
+                likes: parseInt(document.getElementById('videoLikes').value) || 0,
+                comments: parseInt(document.getElementById('videoComments').value) || 0
+            };
+
+            if (!video.title || !video.views) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            store.videos.push(video);
+            saveData();
+            closeAddVideoForm();
+            updateVideosTable();
+            updateDashboard();
+            alert('Video added successfully!');
+        }
+
+        function deleteVideo(id) {
+            if (confirm('Are you sure?')) {
+                store.videos = store.videos.filter(v => v.id !== id);
+                saveData();
+                updateVideosTable();
+                updateDashboard();
+            }
+        }
+
+        // SETTINGS
+        function saveSettings() {
+            store.settings.businessName = document.getElementById('businessName').value;
+            store.settings.businessEmail = document.getElementById('businessEmail').value;
+            store.settings.businessPhone = document.getElementById('businessPhone').value;
+            saveData();
+            alert('Settings saved!');
+        }
+
+        function changePassword() {
+            const current = document.getElementById('currentPassword').value;
+            const newPass = document.getElementById('newPassword').value;
+
+            if (current !== store.settings.adminPassword) {
+                alert('Current password is incorrect');
+                return;
+            }
+
+            if (!newPass) {
+                alert('Please enter new password');
+                return;
+            }
+
+            store.settings.adminPassword = newPass;
+            saveData();
+            alert('Password changed successfully!');
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+        }
+
+        // PUBLIC SITE FUNCTIONS
+        function updatePortfolioGrid() {
+            const grid = document.getElementById('portfolioGrid');
+            grid.innerHTML = store.videos.map(v => `
+                <div class="video-card">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0, 217, 255, 0.3), rgba(0, 255, 136, 0.1));"></div>
+                    <div class="play-btn"></div>
+                    <div class="video-overlay">
+                        <h3>${v.title}</h3>
+                        <div class="video-stats">
+                            <div class="stat">
+                                <span class="stat-icon">👁️</span>
+                                <span>${(v.views / 1000).toFixed(0)}K views</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-icon">❤️</span>
+                                <span>${(v.likes / 1000).toFixed(1)}K likes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateTestimonialsGrid() {
+            const grid = document.getElementById('testimonialsGrid');
+            grid.innerHTML = store.feedback.map(f => `
+                <div class="testimonial-card">
+                    <div class="stars">${'★'.repeat(f.rating)}${'☆'.repeat(5 - f.rating)}</div>
+                    <p class="testimonial-text">"${f.text}"</p>
+                    <div class="author">
+                        <div class="avatar">${f.name.charAt(0)}</div>
+                        <div class="author-info">
+                            <h4>${f.name}</h4>
+                            <p>Client</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateStats() {
+            const totalViews = store.videos.reduce((sum, v) => sum + v.views, 0);
+            const totalLikes = store.videos.reduce((sum, v) => sum + v.likes, 0);
+            const avgEngagement = store.videos.length > 0 ? 
+                ((totalLikes / (totalViews || 1)) * 100).toFixed(0) : 0;
+
+            document.getElementById('statsVideos').textContent = store.videos.length + '+';
+            document.getElementById('statsViews').textContent = (totalViews / 1000000).toFixed(1) + 'M+';
+            document.getElementById('statsClients').textContent = (Math.floor(store.videos.length / 5) + 20) + '+';
+            document.getElementById('statsEngagement').textContent = avgEngagement + '%';
+        }
+
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function contactMe() {
+            alert('Contact form - Integrate with your email service');
+        }
+
+        // INITIALIZE
+        loadData();
+        updatePortfolioGrid();
+        updateTestimonialsGrid();
+        updateStats();
+    </script>
+</body>
+</html>
