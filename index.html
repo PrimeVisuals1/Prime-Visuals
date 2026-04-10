@@ -183,7 +183,17 @@
         }
         @media (max-width: 480px) {
             .portfolio-grid { grid-template-columns: 1fr; }
-        }
+        } 
+.hero-logo {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 30px;
+    border: 4px solid rgba(255,255,255,0.15);
+    box-shadow: 0 10px 30px rgba(0,255,255,0.25);
+}
     </style>
 </head>
 <body>
@@ -206,7 +216,8 @@
 
     <!-- HERO -->
     <section class="hero">
-        <div class="hero-content">
+        <div class="hero-content"> 
+<img src="logo.jpg" class="hero-logo" alt="Prime Visuals">
             <h1>Short-Form Video <span class="highlight">Editing Specialist</span></h1>
             <p>TikTok • Instagram Reels • YouTube Shorts<br>Expert editing that drives engagement and conversions</p>
             <div class="hero-cta">
