@@ -1,1 +1,612 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Prime Visuals- Short-Form Video Editing Specialist</title> <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"> <style> * { margin: 0; padding: 0; box-sizing: border-box; } :root { --primary: #0a0e27; --secondary: #141829; --tertiary: #1f2641; --accent: #00d9ff; --accent-dark: #00a8cc; --success: #00ff88; --warning: #ffaa00; --danger: #ff3366; --text: #f0f4ff; --text-dim: #a0aacf; --border: #2a2f4a; } html { scroll-behavior: smooth; } body { font-family: 'Outfit', sans-serif; background: var(--primary); color: var(--text); overflow-x: hidden; } ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: var(--primary); } ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; } .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; } .btn { padding: 0.8rem 2rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 0.95rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px; } .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: var(--primary); box-shadow: 0 4px 20px rgba(0,217,255,0.3); } .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,217,255,0.5); } .btn-secondary { background: var(--secondary); color: var(--accent); border: 2px solid var(--accent); } .btn-secondary:hover { background: var(--accent); color: var(--primary); } .btn-sm { padding: 0.5rem 1.2rem; font-size: 0.85rem; } .hidden { display: none !important; } /* HEADER */ header { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(10,14,39,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 1.2rem 0; } nav { display: flex; justify-content: space-between; align-items: center; } .logo { font-weight: 800; font-size: 1.6rem; background: linear-gradient(135deg, var(--accent), var(--success)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 2px; text-decoration: none; } nav ul { display: flex; list-style: none; gap: 2.5rem; } nav a { color: var(--text); text-decoration: none; font-weight: 500; position: relative; transition: color 0.3s; } nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; } nav a:hover::after { width: 100%; } .nav-right { display: flex; gap: 1.5rem; align-items: center; } /* HERO */ .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; margin-top: 70px; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); } .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(0,217,255,0.15) 0%, transparent 70%); border-radius: 50%; animation: float 15s ease-in-out infinite; } .hero::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,255,136,0.1) 0%, transparent 70%); border-radius: 50%; animation: float 20s ease-in-out infinite reverse; } @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-40px); } } .hero-content { position: relative; z-index: 2; text-align: center; animation: fadeInUp 1s ease-out 0.3s backwards; } @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } } .hero h1 { font-size: clamp(2rem,8vw,4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -1px; } .highlight { background: linear-gradient(135deg, var(--accent), var(--success)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; } .hero p { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 2.5rem; max-width: 600px; line-height: 1.8; } .hero-cta { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; animation: fadeInUp 1s ease-out 0.5s backwards; } /* PORTFOLIO */ .portfolio { padding: 6rem 0; } .section-header { text-align: center; margin-bottom: 4rem; } .section-header h2 { font-size: clamp(2rem,6vw,3.5rem); font-weight: 800; margin-bottom: 1rem; } .section-header p { color: var(--text-dim); font-size: 1.1rem; margin-top: 1rem; } .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; } /* VIDEO CARD */ .video-card { position: relative; aspect-ratio: 9/16; overflow: hidden; border: 1px solid var(--border); border-radius: 12px; background: var(--secondary); cursor: pointer; transition: all 0.3s; } .video-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,217,255,0.15); } .video-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; } .video-card:hover .video-thumb { transform: scale(1.05); } .video-thumb-placeholder { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,217,255,0.25) 0%, rgba(0,255,136,0.1) 50%, rgba(20,24,41,0.8) 100%); } .video-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,14,39,0.95) 0%, rgba(10,14,39,0.4) 50%, transparent 100%); } .video-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.2rem; z-index: 2; } .video-info h3 { color: var(--text); font-size: 0.95rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.5rem; } .video-stats { display: flex; gap: 1rem; font-size: 0.8rem; color: var(--text-dim); } .stat { display: flex; align-items: center; gap: 0.35rem; } .platform-badge { position: absolute; top: 12px; left: 12px; z-index: 3; padding: 0.25rem 0.65rem; border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; } .badge-youtube { background: #ff0000; color: #fff; } .badge-vimeo { background: #1ab7ea; color: #fff; } .badge-other { background: rgba(10,14,39,0.9); border: 1px solid var(--border); color: var(--accent); } .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; background: rgba(0,217,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; transition: all 0.3s; box-shadow: 0 0 0 0 rgba(0,217,255,0.4); animation: pulse 2.5s ease-in-out infinite; } .video-card:hover .play-btn { transform: translate(-50%,-50%) scale(1.15); box-shadow: 0 8px 30px rgba(0,217,255,0.6); animation: none; } .play-btn svg { width: 22px; height: 22px; fill: var(--primary); margin-left: 3px; } @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,217,255,0.4); } 50% { box-shadow: 0 0 0 12px rgba(0,217,255,0); } } .video-card.no-video { cursor: default; } .video-card.no-video .play-btn { display: none; } .video-card.no-video:hover { transform: translateY(-4px); box-shadow: none; } /* VIDEO MODAL */ .vmodal-overlay { display: none; position: fixed; inset: 0; background: rgba(5,8,20,0.92); backdrop-filter: blur(10px); z-index: 5000; align-items: center; justify-content: center; padding: 1rem; } .vmodal-overlay.active { display: flex; } .vmodal-box { position: relative; width: 100%; max-width: 420px; background: var(--secondary); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1); } @keyframes modalIn { from { opacity:0; transform: scale(0.88) translateY(20px); } to { opacity:1; transform: scale(1) translateY(0); } } .vmodal-player { position: relative; width: 100%; aspect-ratio: 9/16; background: #000; } .vmodal-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; } .vmodal-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); } .vmodal-title { font-size: 0.95rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 40px); } .vmodal-close { background: none; border: none; color: var(--text-dim); font-size: 1.6rem; cursor: pointer; line-height: 1; padding: 0; transition: color 0.2s; flex-shrink: 0; } .vmodal-close:hover { color: var(--danger); } .vmodal-footer { display: flex; gap: 1.5rem; padding: 0.9rem 1.2rem; background: var(--tertiary); font-size: 0.85rem; color: var(--text-dim); } .vmodal-footer span { display: flex; align-items: center; gap: 0.4rem; } /* LOADING STATES */ .loading-placeholder { display: flex; align-items: center; justify-content: center; min-height: 300px; color: var(--text-dim); font-size: 1.1rem; } .loading-placeholder::after { content: ''; display: inline-block; width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 10px; } @keyframes spin { to { transform: rotate(360deg); } } /* TESTIMONIALS */ .testimonials { padding: 6rem 0; } .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; } .testimonial-card { background: var(--secondary); padding: 2rem; border: 1px solid var(--border); border-radius: 12px; border-left: 4px solid var(--accent); transition: transform 0.3s; } .testimonial-card:hover { transform: translateY(-4px); } .stars { color: var(--warning); font-size: 1rem; letter-spacing: 2px; margin-bottom: 1rem; } .testimonial-text { color: var(--text); margin-bottom: 1.5rem; font-style: italic; line-height: 1.8; } .author { display: flex; align-items: center; gap: 1rem; } .avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--success)); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary); flex-shrink: 0; } .author-info h4 { color: var(--text); margin-bottom: 0.2rem; } .author-info p { color: var(--text-dim); font-size: 0.85rem; } /* PRICING */ .pricing { padding: 6rem 0; } .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; } .pricing-card { background: var(--secondary); padding: 2.5rem; border: 2px solid var(--border); border-radius: 12px; position: relative; transition: all 0.3s; } .pricing-card.featured { border-color: var(--accent); background: linear-gradient(135deg, rgba(0,217,255,0.05), rgba(0,255,136,0.05)); transform: scale(1.03); } .pricing-card:hover { border-color: var(--accent); } .pricing-badge { position: absolute; top: -12px; left: 20px; background: var(--accent); color: var(--primary); padding: 0.4rem 1rem; font-size: 0.75rem; font-weight: 700; border-radius: 4px; text-transform: uppercase; } .pricing-name { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem; } .pricing-desc { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem; } .pricing-price { font-size: 3rem; font-weight: 800; color: var(--text); margin-bottom: 0.5rem; } .pricing-price span { font-size: 1rem; color: var(--text-dim); font-weight: 400; } .pricing-features { list-style: none; margin-bottom: 2rem; } .pricing-features li { padding: 0.6rem 0; border-bottom: 1px solid var(--border); color: var(--text-dim); font-size: 0.9rem; padding-left: 1.5rem; position: relative; } .pricing-features li::before { content: '✓'; color: var(--success); margin-right: 0.8rem; font-weight: 700; font-size: 1.1rem; position: absolute; left: 0; } .pricing-card .btn { width: 100%; text-align: center; } /* FOOTER */ footer { background: var(--secondary); border-top: 1px solid var(--border); padding: 4rem 0 2rem; margin-top: 4rem; } .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 3rem; } .footer-section h4 { color: var(--accent); margin-bottom: 1.5rem; font-size: 1.1rem; } .footer-section ul { list-style: none; } .footer-section ul li { margin-bottom: 0.8rem; } .footer-section a { color: var(--text-dim); text-decoration: none; transition: color 0.3s; font-size: 0.9rem; } .footer-section a:hover { color: var(--accent); } .footer-bottom { border-top: 1px solid var(--border); padding-top: 2rem; text-align: center; color: var(--text-dim); font-size: 0.85rem; } /* NOTIFICATION TOAST */ .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--tertiary); border: 1px solid var(--accent); border-radius: 10px; padding: 1rem 1.5rem; color: var(--text); font-size: 0.95rem; z-index: 9999; transform: translateY(100px); opacity: 0; transition: all 0.3s; max-width: 320px; } .toast.show { transform: translateY(0); opacity: 1; } .toast.error { border-color: var(--danger); } @media (max-width: 768px) { nav ul { display: none; } .hero { margin-top: 60px; } .portfolio-grid { grid-template-columns: repeat(2, 1fr); } .pricing-card.featured { transform: scale(1); } } @media (max-width: 480px) { .portfolio-grid { grid-template-columns: 1fr; } } .hero-logo { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 30px; border: 4px solid rgba(255,255,255,0.15); box-shadow: 0 10px 30px rgba(0,255,255,0.25); } </style> </head> <body> <!-- HEADER --> <header> <div class="container"> <nav> <a href="index.html" class="logo">▶ Prime Visuals</a> <ul> <li><a href="#portfolio">Portfolio</a></li> <li><a href="#testimonials">Testimonials</a></li> <li><a href="#pricing">Pricing</a></li> </ul> <div class="nav-right"> <a href="admin.html" class="btn btn-secondary btn-sm">Admin</a> </div> </nav> </div> </header> <!-- HERO --> <section class="hero"> <div class="hero-content"> <img src="logo.jpg" class="hero-logo" alt="Prime Visuals"> <h1>Short-Form Video <span class="highlight">Editing Specialist</span></h1> <p>TikTok • Instagram Reels • YouTube Shorts<br>Expert editing that drives engagement and conversions</p> <div class="hero-cta"> <button class="btn btn-primary" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">View Portfolio</button> <button class="btn btn-secondary" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Hire Me</button> </div> </div> </section> <!-- PORTFOLIO --> <section class="portfolio" id="portfolio"> <div class="container"> <div class="section-header"> <h2>Recent <span class="highlight">Work</span></h2> <p>Showcasing high-performing short-form content across platforms</p> </div> <div class="portfolio-grid" id="portfolioGrid"> <div class="loading-placeholder" style="grid-column:1/-1">Loading portfolio</div> </div> </div> </section> <!-- TESTIMONIALS <section class="testimonials" id="testimonials"> <div class="container"> <div class="section-header"> <h2>Client <span class="highlight">Feedback</span></h2> <p>What my clients are saying about working with me</p> </div> <div class="testimonials-grid" id="testimonialsGrid"> <div class="loading-placeholder" style="grid-column:1/-1">Loading testimonials</div> </div> </div> </section> --> <!-- PRICING <section class="pricing" id="pricing"> <div class="container"> <div class="section-header"> <h2>Simple <span class="highlight">Pricing</span></h2> <p>Transparent pricing for every stage of your content journey</p> </div> <div class="pricing-grid" id="pricingGrid"> <div class="loading-placeholder" style="grid-column:1/-1">Loading pricing</div> </div> </div> </section> --> <!-- FOOTER --> <footer> <div class="container"> <div class="footer-content"> <div class="footer-section"> <h4>ShortForm Pro</h4> <p style="color:var(--text-dim);line-height:1.8;">Professional short-form video editing for creators and brands. Based in India, serving global clients.</p> </div> <div class="footer-section"> <h4>Navigation</h4> <ul> <li><a href="#portfolio">Portfolio</a></li> <li><a href="#testimonials">Reviews</a></li> <li><a href="#pricing">Pricing</a></li> </ul> </div> <div class="footer-section"> <h4>Connect</h4> <ul> <li><a href="#" id="footerInstagram">Instagram</a></li> <li><a href="#" id="footerYoutube">YouTube</a></li> <li><a href="#" id="footerEmail">Email</a></li> <li><a href="https://wa.link/tkvzqx" id="footerContact">Contact us</a></li> </ul> </div> </div> <div class="footer-bottom"> <p id="footerCopyright">© 2026 Prime Visuals. All rights reserved.</p> </div> </div> </footer> <!-- VIDEO MODAL --> <div class="vmodal-overlay" id="videoModal" onclick="closeVideoModal(event)"> <div class="vmodal-box" id="videoModalBox"> <div class="vmodal-header"> <div class="vmodal-title" id="vmodalTitle"></div> <button class="vmodal-close" onclick="closeVideoModal()">×</button> </div> <div class="vmodal-player" id="vmodalPlayer"></div> <div class="vmodal-footer" id="vmodalFooter"></div> </div> </div> <!-- TOAST NOTIFICATION --> <div class="toast" id="toast"></div> <!-- FIREBASE SDK --> <script type="module"> import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js"; import { getFirestore, collection, getDocs, doc, getDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js"; import { FIREBASE_CONFIG } from './firebase-config.js'; const app = initializeApp(FIREBASE_CONFIG); const db = getFirestore(app); function fmt(n) { if (n >= 1000000) return (n/1000000).toFixed(1)+'M'; if (n >= 1000) return (n/1000).toFixed(0)+'K'; return n || 0; } function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); } function parseVideoUrl(url) { if (!url) return null; const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/|v\/))([A-Za-z0-9_-]{11})/); if (ytMatch) { const id = ytMatch[1]; return { type: 'youtube', id, embedUrl: `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`, thumbUrl: `https://img.youtube.com/vi/${id}/hqdefault.jpg`, badgeClass: 'badge-youtube', label: 'YouTube' }; } const vmMatch = url.match(/(?:vimeo\.com\/(?:video\/)?)(\d+)/); if (vmMatch) { const id = vmMatch[1]; return { type: 'vimeo', id, embedUrl: `https://player.vimeo.com/video/${id}?autoplay=1&title=0&byline=0&portrait=0`, thumbUrl: null, badgeClass: 'badge-vimeo', label: 'Vimeo' }; } return null; } async function getVimeoThumb(id) { try { const r = await fetch(`https://vimeo.com/api/v2/video/${id}.json`); const d = await r.json(); return d[0]?.thumbnail_large || null; } catch { return null; } } function buildVideoCard(v) { const parsed = parseVideoUrl(v.videoUrl); const hasVideo = !!parsed; let thumbHtml = ''; if (parsed?.type === 'youtube') { thumbHtml = `<img class="video-thumb" src="${parsed.thumbUrl}" alt="${escHtml(v.title)}" loading="lazy" onerror="this.style.display='none'">`; } const badgeHtml = parsed ? `<span class="platform-badge ${parsed.badgeClass}">${parsed.label}</span>` : `<span class="platform-badge badge-other">${escHtml(v.platform||'Video')}</span>`; const playHtml = hasVideo ? `<div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>` : ''; const cardClass = hasVideo ? 'video-card' : 'video-card no-video'; const clickAttr = hasVideo ? `onclick="openVideoModal('${escHtml(v.videoUrl)}','${escHtml(v.title)}',${v.views||0},${v.likes||0},'${escHtml(v.platform||'')}')"` : ''; return `<div class="${cardClass}" ${clickAttr} data-vimeo-id="${parsed?.type==='vimeo' ? parsed.id : ''}"> <div class="video-thumb-placeholder"></div> ${thumbHtml} <div class="video-scrim"></div> ${badgeHtml} ${playHtml} <div class="video-info"> <h3>${escHtml(v.title)}</h3> <div class="video-stats"> <div class="stat"><span>👁️</span><span>${fmt(v.views||0)}</span></div> <div class="stat"><span>❤️</span><span>${fmt(v.likes||0)}</span></div> </div> </div> </div>`; } async function injectVimeoThumbs() { const cards = document.querySelectorAll('[data-vimeo-id]'); for (const card of cards) { const id = card.dataset.vimeoId; if (!id) continue; const thumb = await getVimeoThumb(id); if (thumb) { const img = document.createElement('img'); img.className = 'video-thumb'; img.src = thumb; img.alt = ''; img.loading = 'lazy'; card.insertBefore(img, card.querySelector('.video-scrim')); } } } window.openVideoModal = function(url, title, views, likes, platform) { const parsed = parseVideoUrl(url); if (!parsed) return; document.getElementById('vmodalTitle').textContent = title; document.getElementById('vmodalPlayer').innerHTML = `<iframe src="${parsed.embedUrl}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`; document.getElementById('vmodalFooter').innerHTML = `<span>👁️ ${fmt(views)} views</span><span>❤️ ${fmt(likes)} likes</span><span>📱 ${escHtml(platform)}</span>`; document.getElementById('videoModal').classList.add('active'); document.body.style.overflow = 'hidden'; }; window.closeVideoModal = function(e) { if (e && e.target !== document.getElementById('videoModal')) return; _closeModal(); }; function _closeModal() { document.getElementById('videoModal').classList.remove('active'); document.getElementById('vmodalPlayer').innerHTML = ''; document.body.style.overflow = ''; } document.addEventListener('keydown', e => { if (e.key === 'Escape') _closeModal(); }); async function loadVideos() { const grid = document.getElementById('portfolioGrid'); try { const snap = await getDocs(query(collection(db,'videos'), orderBy('createdAt','desc'))); if (snap.empty) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-dim);padding:3rem;">No portfolio videos yet. Check back soon!</div>'; return; } const videos = snap.docs.map(d => ({id:d.id,...d.data()})); grid.innerHTML = videos.map(buildVideoCard).join(''); injectVimeoThumbs(); } catch(err) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--danger);padding:3rem;">Failed to load portfolio. Please try again later.</div>'; console.error('loadVideos:', err); } } async function loadTestimonials() { const grid = document.getElementById('testimonialsGrid'); try { const snap = await getDocs(query(collection(db,'testimonials'), orderBy('createdAt','desc'))); if (snap.empty) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-dim);padding:3rem;">No testimonials yet.</div>'; return; } grid.innerHTML = snap.docs.map(d => { const t = d.data(); const stars = '★'.repeat(t.rating||5) + '☆'.repeat(5-(t.rating||5)); return `<div class="testimonial-card"><div class="stars">${stars}</div><p class="testimonial-text">"${escHtml(t.text)}"</p><div class="author"><div class="avatar">${(t.name||'A').charAt(0).toUpperCase()}</div><div class="author-info"><h4>${escHtml(t.name)}</h4><p>${escHtml(t.role||'Client')}</p></div></div></div>`; }).join(''); } catch(err) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--danger);padding:3rem;">Failed to load testimonials.</div>'; } } async function loadPricing() { const grid = document.getElementById('pricingGrid'); try { const snap = await getDocs(query(collection(db,'pricing'), orderBy('order','asc'))); if (snap.empty) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-dim);padding:3rem;">Pricing coming soon. Contact for quotes.</div>'; return; } grid.innerHTML = snap.docs.map(d => { const p = d.data(); const featList = (p.features||[]).map(f=>`<li>${escHtml(f)}</li>`).join(''); return `<div class="pricing-card ${p.featured?'featured':''}">${p.featured?'<div class="pricing-badge">Most Popular</div>':''}<div class="pricing-name">${escHtml(p.name)}</div><div class="pricing-desc">${escHtml(p.description||'')}</div><div class="pricing-price">$${p.price}<span>/ ${escHtml(p.period||'project')}</span></div><ul class="pricing-features">${featList}</ul><button class="btn ${p.featured?'btn-primary':'btn-secondary'}" onclick="document.getElementById('pricing').scrollIntoView()">Get Started</button></div>`; }).join(''); } catch(err) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--danger);padding:3rem;">Failed to load pricing.</div>'; } } async function loadSettings() { try { const snap = await getDoc(doc(db,'settings','site')); if (snap.exists()) { const s = snap.data(); if (s.footerCopyright) document.getElementById('footerCopyright').textContent = s.footerCopyright; if (s.instagram) document.getElementById('footerInstagram').href = s.instagram; if (s.youtube) document.getElementById('footerYoutube').href = s.youtube; if (s.Contact) document.getElementById('footerContact').href = s.Contact; if (s.email) document.getElementById('footerEmail').href = 'mailto:'+s.email; } } catch(err) { console.error('loadSettings:', err); } } Promise.all([loadVideos(), loadTestimonials(), loadPricing(), loadSettings()]) .catch(err => console.error('Init error:', err)); </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Visuals- Short-Form Video Editing Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+        --primary: #0a0e27;
+        --secondary: #141829;
+        --tertiary: #1f2641;
+        --accent: #00d9ff;
+        --accent-dark: #00a8cc;
+        --success: #00ff88;
+        --warning: #ffaa00;
+        --danger: #ff3366;
+        --text: #f0f4ff;
+        --text-dim: #a0aacf;
+        --border: #2a2f4a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Outfit', sans-serif; background: var(--primary); color: var(--text); overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--primary); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+    .btn { padding: 0.8rem 2rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 0.95rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: var(--primary); box-shadow: 0 4px 20px rgba(0,217,255,0.3); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,217,255,0.5); }
+    .btn-secondary { background: var(--secondary); color: var(--accent); border: 2px solid var(--accent); }
+    .btn-secondary:hover { background: var(--accent); color: var(--primary); }
+    .btn-sm { padding: 0.5rem 1.2rem; font-size: 0.85rem; }
+    .hidden { display: none !important; }
+
+    /* HEADER */
+    header { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(10,14,39,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); padding: 1.2rem 0; }
+    nav { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: 800; font-size: 1.6rem; background: linear-gradient(135deg, var(--accent), var(--success)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 2px; text-decoration: none; }
+    nav ul { display: flex; list-style: none; gap: 2.5rem; }
+    nav a { color: var(--text); text-decoration: none; font-weight: 500; position: relative; transition: color 0.3s; }
+    nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
+    nav a:hover::after { width: 100%; }
+    .nav-right { display: flex; gap: 1.5rem; align-items: center; }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; margin-top: 70px; position: relative; overflow: hidden; background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); }
+    .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(0,217,255,0.15) 0%, transparent 70%); border-radius: 50%; animation: float 15s ease-in-out infinite; }
+    .hero::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,255,136,0.1) 0%, transparent 70%); border-radius: 50%; animation: float 20s ease-in-out infinite reverse; }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-40px); } }
+    .hero-content { position: relative; z-index: 2; text-align: center; animation: fadeInUp 1s ease-out 0.3s backwards; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    .hero h1 { font-size: clamp(2rem,8vw,4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -1px; }
+    .highlight { background: linear-gradient(135deg, var(--accent), var(--success)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 2.5rem; max-width: 600px; line-height: 1.8; }
+    .hero-cta { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; animation: fadeInUp 1s ease-out 0.5s backwards; }
+
+    /* PORTFOLIO */
+    .portfolio { padding: 6rem 0; }
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    .section-header h2 { font-size: clamp(2rem,6vw,3.5rem); font-weight: 800; margin-bottom: 1rem; }
+    .section-header p { color: var(--text-dim); font-size: 1.1rem; margin-top: 1rem; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+
+    /* VIDEO CARD */
+    .video-card { position: relative; aspect-ratio: 9/16; overflow: hidden; border: 1px solid var(--border); border-radius: 12px; background: var(--secondary); cursor: pointer; transition: all 0.3s; }
+    .video-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,217,255,0.15); }
+    .video-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .video-card:hover .video-thumb { transform: scale(1.05); }
+    .video-thumb-placeholder { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,217,255,0.25) 0%, rgba(0,255,136,0.1) 50%, rgba(20,24,41,0.8) 100%); }
+    .video-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,14,39,0.95) 0%, rgba(10,14,39,0.4) 50%, transparent 100%); }
+    .video-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 1.2rem; z-index: 2; }
+    .video-info h3 { color: var(--text); font-size: 0.95rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.5rem; }
+    .video-stats { display: flex; gap: 1rem; font-size: 0.8rem; color: var(--text-dim); }
+    .stat { display: flex; align-items: center; gap: 0.35rem; }
+    .platform-badge { position: absolute; top: 12px; left: 12px; z-index: 3; padding: 0.25rem 0.65rem; border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .badge-youtube { background: #ff0000; color: #fff; }
+    .badge-vimeo { background: #1ab7ea; color: #fff; }
+    .badge-instagram { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
+    .badge-other { background: rgba(10,14,39,0.9); border: 1px solid var(--border); color: var(--accent); }
+    .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; background: rgba(0,217,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; transition: all 0.3s; box-shadow: 0 0 0 0 rgba(0,217,255,0.4); animation: pulse 2.5s ease-in-out infinite; }
+    .video-card:hover .play-btn { transform: translate(-50%,-50%) scale(1.15); box-shadow: 0 8px 30px rgba(0,217,255,0.6); animation: none; }
+    .play-btn svg { width: 22px; height: 22px; fill: var(--primary); margin-left: 3px; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(0,217,255,0.4); } 50% { box-shadow: 0 0 0 12px rgba(0,217,255,0); } }
+    .video-card.no-video { cursor: default; }
+    .video-card.no-video .play-btn { display: none; }
+    .video-card.no-video:hover { transform: translateY(-4px); box-shadow: none; }
+
+    /* ── INSTAGRAM PREVIEW EMBED ─────────────────────────── */
+    /* Sits behind the scrim — acts as the "thumbnail" */
+    .ig-preview-wrap {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        overflow: hidden;
+        pointer-events: none; /* clicks pass through to card onclick */
+    }
+    .ig-preview-wrap iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        transform: scale(1.05); /* hide scrollbars edge */
+    }
+    /* Loading shimmer shown before iframe loads */
+    .ig-loading {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(0,217,255,0.15) 0%, rgba(188,24,136,0.15) 100%);
+        z-index: 2;
+        transition: opacity 0.5s;
+    }
+    .ig-loading.done { opacity: 0; pointer-events: none; }
+    .ig-spinner { width: 32px; height: 32px; border: 3px solid rgba(255,255,255,0.2); border-top-color: #fff; border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── VIDEO MODAL ────────────────────────────────────── */
+    .vmodal-overlay { display: none; position: fixed; inset: 0; background: rgba(5,8,20,0.92); backdrop-filter: blur(10px); z-index: 5000; align-items: center; justify-content: center; padding: 1rem; }
+    .vmodal-overlay.active { display: flex; }
+    .vmodal-box { position: relative; width: 100%; max-width: 420px; background: var(--secondary); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+    @keyframes modalIn { from { opacity:0; transform: scale(0.88) translateY(20px); } to { opacity:1; transform: scale(1) translateY(0); } }
+    .vmodal-player { position: relative; width: 100%; aspect-ratio: 9/16; background: #000; }
+    .vmodal-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .vmodal-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); }
+    .vmodal-title { font-size: 0.95rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100% - 40px); }
+    .vmodal-close { background: none; border: none; color: var(--text-dim); font-size: 1.6rem; cursor: pointer; line-height: 1; padding: 0; transition: color 0.2s; flex-shrink: 0; }
+    .vmodal-close:hover { color: var(--danger); }
+    .vmodal-footer { display: flex; gap: 1.5rem; padding: 0.9rem 1.2rem; background: var(--tertiary); font-size: 0.85rem; color: var(--text-dim); }
+    .vmodal-footer span { display: flex; align-items: center; gap: 0.4rem; }
+
+    /* LOADING */
+    .loading-placeholder { display: flex; align-items: center; justify-content: center; min-height: 300px; color: var(--text-dim); font-size: 1.1rem; }
+    .loading-placeholder::after { content: ''; display: inline-block; width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 10px; }
+
+    /* STATS */
+    .stats-section { padding: 2rem 0 4rem; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+    .stat-card { background: var(--secondary); padding: 2rem; border: 1px solid var(--border); border-radius: 12px; text-align: center; transition: all 0.3s; }
+    .stat-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .stat-number { font-size: 3rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--success)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; }
+    .stat-label { color: var(--text-dim); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* TESTIMONIALS */
+    .testimonials { padding: 6rem 0; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+    .testimonial-card { background: var(--secondary); padding: 2rem; border: 1px solid var(--border); border-radius: 12px; border-left: 4px solid var(--accent); transition: transform 0.3s; }
+    .testimonial-card:hover { transform: translateY(-4px); }
+    .stars { color: var(--warning); font-size: 1rem; letter-spacing: 2px; margin-bottom: 1rem; }
+    .testimonial-text { color: var(--text); margin-bottom: 1.5rem; font-style: italic; line-height: 1.8; }
+    .author { display: flex; align-items: center; gap: 1rem; }
+    .avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--success)); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary); flex-shrink: 0; }
+    .author-info h4 { color: var(--text); margin-bottom: 0.2rem; }
+    .author-info p { color: var(--text-dim); font-size: 0.85rem; }
+
+    /* PRICING */
+    .pricing { padding: 6rem 0; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .pricing-card { background: var(--secondary); padding: 2.5rem; border: 2px solid var(--border); border-radius: 12px; position: relative; transition: all 0.3s; }
+    .pricing-card.featured { border-color: var(--accent); background: linear-gradient(135deg, rgba(0,217,255,0.05), rgba(0,255,136,0.05)); transform: scale(1.03); }
+    .pricing-card:hover { border-color: var(--accent); }
+    .pricing-badge { position: absolute; top: -12px; left: 20px; background: var(--accent); color: var(--primary); padding: 0.4rem 1rem; font-size: 0.75rem; font-weight: 700; border-radius: 4px; text-transform: uppercase; }
+    .pricing-name { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 0.5rem; }
+    .pricing-desc { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .pricing-price { font-size: 3rem; font-weight: 800; color: var(--text); margin-bottom: 0.5rem; }
+    .pricing-price span { font-size: 1rem; color: var(--text-dim); font-weight: 400; }
+    .pricing-features { list-style: none; margin-bottom: 2rem; }
+    .pricing-features li { padding: 0.6rem 0; border-bottom: 1px solid var(--border); color: var(--text-dim); font-size: 0.9rem; padding-left: 1.5rem; position: relative; }
+    .pricing-features li::before { content: '✓'; color: var(--success); margin-right: 0.8rem; font-weight: 700; font-size: 1.1rem; position: absolute; left: 0; }
+    .pricing-card .btn { width: 100%; text-align: center; }
+
+    /* FOOTER */
+    footer { background: var(--secondary); border-top: 1px solid var(--border); padding: 4rem 0 2rem; margin-top: 4rem; }
+    .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+    .footer-section h4 { color: var(--accent); margin-bottom: 1.5rem; font-size: 1.1rem; }
+    .footer-section ul { list-style: none; }
+    .footer-section ul li { margin-bottom: 0.8rem; }
+    .footer-section a { color: var(--text-dim); text-decoration: none; transition: color 0.3s; font-size: 0.9rem; }
+    .footer-section a:hover { color: var(--accent); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 2rem; text-align: center; color: var(--text-dim); font-size: 0.85rem; }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--tertiary); border: 1px solid var(--accent); border-radius: 10px; padding: 1rem 1.5rem; color: var(--text); font-size: 0.95rem; z-index: 9999; transform: translateY(100px); opacity: 0; transition: all 0.3s; max-width: 320px; }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.error { border-color: var(--danger); }
+
+    @media (max-width: 768px) {
+        nav ul { display: none; }
+        .hero { margin-top: 60px; }
+        .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+        .pricing-card.featured { transform: scale(1); }
+    }
+    @media (max-width: 480px) {
+        .portfolio-grid { grid-template-columns: 1fr; }
+    }
+    .hero-logo {
+        width: 220px; height: 220px; border-radius: 50%; object-fit: cover;
+        display: block; margin: 0 auto 30px;
+        border: 4px solid rgba(255,255,255,0.15);
+        box-shadow: 0 10px 30px rgba(0,255,255,0.25);
+    }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="container">
+        <nav>
+            <a href="index.html" class="logo">▶ Prime Visuals</a>
+            <ul>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="admin.html" class="btn btn-secondary btn-sm">Admin</a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <img src="logo.jpg" class="hero-logo" alt="Prime Visuals">
+        <h1>Short-Form Video <span class="highlight">Editing Specialist</span></h1>
+        <p>TikTok • Instagram Reels • YouTube Shorts<br>Expert editing that drives engagement and conversions</p>
+        <div class="hero-cta">
+            <button class="btn btn-primary" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">View Portfolio</button>
+            <button class="btn btn-secondary" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Hire Me</button>
+        </div>
+    </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+    <div class="container">
+        <div class="section-header">
+            <h2>Recent <span class="highlight">Work</span></h2>
+            <p>Showcasing high-performing short-form content across platforms</p>
+        </div>
+        <div class="portfolio-grid" id="portfolioGrid">
+            <div class="loading-placeholder" style="grid-column:1/-1">Loading portfolio</div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-number" id="statsVideos">—</div><div class="stat-label">Videos Delivered</div></div>
+            <div class="stat-card"><div class="stat-number" id="statsViews">—</div><div class="stat-label">Total Views</div></div>
+            <div class="stat-card"><div class="stat-number" id="statsClients">—</div><div class="stat-label">Happy Clients</div></div>
+            <div class="stat-card"><div class="stat-number" id="statsEngagement">—</div><div class="stat-label">Avg Engagement</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS 
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <h2>Client <span class="highlight">Feedback</span></h2>
+            <p>What my clients are saying about working with me</p>
+        </div>
+        <div class="testimonials-grid" id="testimonialsGrid">
+            <div class="loading-placeholder" style="grid-column:1/-1">Loading testimonials</div>
+        </div>
+    </div>
+</section> -->
+
+<!-- PRICING 
+<section class="pricing" id="pricing">
+    <div class="container">
+        <div class="section-header">
+            <h2>Simple <span class="highlight">Pricing</span></h2>
+            <p>Transparent pricing for every stage of your content journey</p>
+        </div>
+        <div class="pricing-grid" id="pricingGrid">
+            <div class="loading-placeholder" style="grid-column:1/-1">Loading pricing</div>
+        </div>
+    </div>
+</section> -->
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ShortForm Pro</h4>
+                <p style="color:var(--text-dim);line-height:1.8;">Professional short-form video editing for creators and brands. Based in India, serving global clients.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#" id="footerInstagram">Instagram</a></li>
+                    <li><a href="#" id="footerYoutube">YouTube</a></li>
+                    <li><a href="#" id="footerEmail">Email</a></li>
+                    <li><a href="https://wa.link/tkvzqx" id="footerContact">Contact us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p id="footerCopyright">© 2026 Prime Visuals. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div class="vmodal-overlay" id="videoModal" onclick="closeVideoModal(event)">
+    <div class="vmodal-box" id="videoModalBox">
+        <div class="vmodal-header">
+            <div class="vmodal-title" id="vmodalTitle"></div>
+            <button class="vmodal-close" onclick="closeVideoModal()">×</button>
+        </div>
+        <div class="vmodal-player" id="vmodalPlayer"></div>
+        <div class="vmodal-footer" id="vmodalFooter"></div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getFirestore, collection, getDocs, doc, getDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+import { FIREBASE_CONFIG } from './firebase-config.js';
+
+const app = initializeApp(FIREBASE_CONFIG);
+const db = getFirestore(app);
+
+function fmt(n) {
+    if (n >= 1000000) return (n/1000000).toFixed(1)+'M';
+    if (n >= 1000) return (n/1000).toFixed(0)+'K';
+    return n || 0;
+}
+function escHtml(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ─── VIDEO URL PARSER ─────────────────────────────────────────────────
+function parseVideoUrl(url) {
+    if (!url) return null;
+
+    // YouTube
+    const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/|v\/))([A-Za-z0-9_-]{11})/);
+    if (ytMatch) {
+        const id = ytMatch[1];
+        return {
+            type: 'youtube', id,
+            embedUrl: `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`,
+            thumbUrl: `https://img.youtube.com/vi/${id}/hqdefault.jpg`,
+            badgeClass: 'badge-youtube', label: 'YouTube'
+        };
+    }
+
+    // Vimeo
+    const vmMatch = url.match(/(?:vimeo\.com\/(?:video\/)?)(\d+)/);
+    if (vmMatch) {
+        const id = vmMatch[1];
+        return {
+            type: 'vimeo', id,
+            embedUrl: `https://player.vimeo.com/video/${id}?autoplay=1&title=0&byline=0&portrait=0`,
+            thumbUrl: null,
+            badgeClass: 'badge-vimeo', label: 'Vimeo'
+        };
+    }
+
+    // Instagram Reels
+    const igMatch = url.match(/instagram\.com\/(?:reel|p)\/([A-Za-z0-9_-]+)/);
+    if (igMatch) {
+        const id = igMatch[1];
+        return {
+            type: 'instagram', id,
+            // card preview: no autoplay, no controls, just shows first frame
+            previewUrl: `https://www.instagram.com/p/${id}/embed/`,
+            // modal: full embed
+            embedUrl: `https://www.instagram.com/p/${id}/embed/`,
+            thumbUrl: null,
+            badgeClass: 'badge-instagram', label: 'Instagram'
+        };
+    }
+
+    return null;
+}
+
+async function getVimeoThumb(id) {
+    try {
+        const r = await fetch(`https://vimeo.com/api/v2/video/${id}.json`);
+        const d = await r.json();
+        return d[0]?.thumbnail_large || null;
+    } catch { return null; }
+}
+
+// ─── BUILD VIDEO CARD ─────────────────────────────────────────────────
+function buildVideoCard(v) {
+    const parsed = parseVideoUrl(v.videoUrl);
+    const hasVideo = !!parsed;
+
+    let thumbHtml = '';
+
+    if (parsed?.type === 'youtube') {
+        // YouTube: static image thumbnail
+        thumbHtml = `<img class="video-thumb" src="${parsed.thumbUrl}" alt="${escHtml(v.title)}" loading="lazy" onerror="this.style.display='none'">`;
+
+    } else if (parsed?.type === 'instagram') {
+        // Instagram: live iframe preview as "thumbnail"
+        // pointer-events: none so click goes to card, not iframe
+        thumbHtml = `
+            <div class="ig-preview-wrap" data-ig-id="${parsed.id}">
+                <div class="ig-loading" id="ig-load-${parsed.id}">
+                    <div class="ig-spinner"></div>
+                </div>
+                <iframe
+                    src="${parsed.previewUrl}"
+                    scrolling="no"
+                    allowtransparency="true"
+                    onload="document.getElementById('ig-load-${parsed.id}')?.classList.add('done')"
+                ></iframe>
+            </div>`;
+    }
+    // Vimeo: thumb injected async after render
+
+    const badgeHtml = parsed
+        ? `<span class="platform-badge ${parsed.badgeClass}">${parsed.label}</span>`
+        : `<span class="platform-badge badge-other">${escHtml(v.platform||'Video')}</span>`;
+
+    const playHtml = hasVideo
+        ? `<div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>`
+        : '';
+
+    const cardClass = hasVideo ? 'video-card' : 'video-card no-video';
+    const clickAttr = hasVideo
+        ? `onclick="openVideoModal('${escHtml(v.videoUrl)}','${escHtml(v.title)}',${v.views||0},${v.likes||0},'${escHtml(v.platform||'')}')"`
+        : '';
+
+    return `
+        <div class="${cardClass}" ${clickAttr}
+            data-vimeo-id="${parsed?.type==='vimeo' ? parsed.id : ''}">
+            <div class="video-thumb-placeholder"></div>
+            ${thumbHtml}
+            <div class="video-scrim"></div>
+            ${badgeHtml}
+            ${playHtml}
+            <div class="video-info">
+                <h3>${escHtml(v.title)}</h3>
+                <div class="video-stats">
+                    <div class="stat"><span>👁️</span><span>${fmt(v.views||0)}</span></div>
+                    <div class="stat"><span>❤️</span><span>${fmt(v.likes||0)}</span></div>
+                </div>
+            </div>
+        </div>`;
+}
+
+async function injectVimeoThumbs() {
+    const cards = document.querySelectorAll('[data-vimeo-id]');
+    for (const card of cards) {
+        const id = card.dataset.vimeoId;
+        if (!id) continue;
+        const thumb = await getVimeoThumb(id);
+        if (thumb) {
+            const img = document.createElement('img');
+            img.className = 'video-thumb'; img.src = thumb; img.alt = ''; img.loading = 'lazy';
+            card.insertBefore(img, card.querySelector('.video-scrim'));
+        }
+    }
+}
+
+// ─── MODAL ────────────────────────────────────────────────────────────
+window.openVideoModal = function(url, title, views, likes, platform) {
+    const parsed = parseVideoUrl(url);
+    if (!parsed) return;
+    document.getElementById('vmodalTitle').textContent = title;
+    document.getElementById('vmodalPlayer').innerHTML =
+        `<iframe src="${parsed.embedUrl}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+    document.getElementById('vmodalFooter').innerHTML =
+        `<span>👁️ ${fmt(views)} views</span><span>❤️ ${fmt(likes)} likes</span><span>📱 ${escHtml(platform)}</span>`;
+    document.getElementById('videoModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+};
+
+window.closeVideoModal = function(e) {
+    if (e && e.target !== document.getElementById('videoModal')) return;
+    _closeModal();
+};
+function _closeModal() {
+    document.getElementById('videoModal').classList.remove('active');
+    document.getElementById('vmodalPlayer').innerHTML = '';
+    document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') _closeModal(); });
+
+// ─── LOAD VIDEOS ──────────────────────────────────────────────────────
+async function loadVideos() {
+    const grid = document.getElementById('portfolioGrid');
+    try {
+        const snap = await getDocs(query(collection(db,'videos'), orderBy('createdAt','desc')));
+        if (snap.empty) {
+            grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-dim);padding:3rem;">No portfolio videos yet. Check back soon!</div>';
+            updateStats([]);
+            return;
+        }
+        const videos = snap.docs.map(d => ({id:d.id,...d.data()}));
+        grid.innerHTML = videos.map(buildVideoCard).join('');
+        updateStats(videos);
+        injectVimeoThumbs();
+    } catch(err) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--danger);padding:3rem;">Failed to load portfolio. Please try again later.</div>';
+        console.error('loadVideos:', err);
+    }
+}
+
+// ─── LOAD TESTIMONIALS ────────────────────────────────────────────────
+async function loadTestimonials() {
+    const grid = document.getElementById('testimonialsGrid');
+    try {
+        const snap = await getDocs(query(collection(db,'testimonials'), orderBy('createdAt','desc')));
+        if (snap.empty) {
+            grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-dim);padding:3rem;">No testimonials yet.</div>';
+            return;
+        }
+        grid.innerHTML = snap.docs.map(d => {
+            const t = d.data();
+            const stars = '★'.repeat(t.rating||5) + '☆'.repeat(5-(t.rating||5));
+            return `
+                <div class="testimonial-card">
+                    <div class="stars">${stars}</div>
+                    <p class="testimonial-text">"${escHtml(t.text)}"</p>
+                    <div class="author">
+                        <div class="avatar">${(t.name||'A').charAt(0).toUpperCase()}</div>
+                        <div class="author-info">
+                            <h4>${escHtml(t.name)}</h4>
+                            <p>${escHtml(t.role||'Client')}</p>
+                        </div>
+                    </div>
+                </div>`;
+        }).join('');
+    } catch(err) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--danger);padding:3rem;">Failed to load testimonials.</div>';
+    }
+}
+
+// ─── LOAD PRICING ─────────────────────────────────────────────────────
+async function loadPricing() {
+    const grid = document.getElementById('pricingGrid');
+    try {
+        const snap = await getDocs(query(collection(db,'pricing'), orderBy('order','asc')));
+        if (snap.empty) {
+            grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-dim);padding:3rem;">Pricing coming soon. Contact for quotes.</div>';
+            return;
+        }
+        grid.innerHTML = snap.docs.map(d => {
+            const p = d.data();
+            const featList = (p.features||[]).map(f=>`<li>${escHtml(f)}</li>`).join('');
+            return `
+                <div class="pricing-card ${p.featured?'featured':''}">
+                    ${p.featured?'<div class="pricing-badge">Most Popular</div>':''}
+                    <div class="pricing-name">${escHtml(p.name)}</div>
+                    <div class="pricing-desc">${escHtml(p.description||'')}</div>
+                    <div class="pricing-price">$${p.price}<span>/ ${escHtml(p.period||'project')}</span></div>
+                    <ul class="pricing-features">${featList}</ul>
+                    <button class="btn ${p.featured?'btn-primary':'btn-secondary'}" onclick="document.getElementById('pricing').scrollIntoView()">Get Started</button>
+                </div>`;
+        }).join('');
+    } catch(err) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--danger);padding:3rem;">Failed to load pricing.</div>';
+    }
+}
+
+// ─── LOAD SETTINGS ────────────────────────────────────────────────────
+async function loadSettings() {
+    try {
+        const snap = await getDoc(doc(db,'settings','site'));
+        if (snap.exists()) {
+            const s = snap.data();
+            if (s.footerCopyright) document.getElementById('footerCopyright').textContent = s.footerCopyright;
+            if (s.instagram) document.getElementById('footerInstagram').href = s.instagram;
+            if (s.youtube) document.getElementById('footerYoutube').href = s.youtube;
+            if (s.Contact) document.getElementById('footerContact').href = s.Contact;
+            if (s.email) document.getElementById('footerEmail').href = 'mailto:'+s.email;
+        }
+    } catch(err) { console.error('loadSettings:', err); }
+}
+
+// ─── STATS ────────────────────────────────────────────────────────────
+function updateStats(videos) {
+    const totalViews = videos.reduce((s,v)=>s+(v.views||0),0);
+    const totalLikes = videos.reduce((s,v)=>s+(v.likes||0),0);
+    const avgEng = totalViews > 0 ? Math.round((totalLikes/totalViews)*100) : 0;
+    document.getElementById('statsVideos').textContent = (videos.length||0)+'+';
+    document.getElementById('statsViews').textContent = fmt(totalViews)+'+';
+    document.getElementById('statsClients').textContent = Math.max(20, Math.floor(videos.length/3))+'+';
+    document.getElementById('statsEngagement').textContent = avgEng+'%';
+}
+
+// ─── BOOT ─────────────────────────────────────────────────────────────
+Promise.all([loadVideos(), loadTestimonials(), loadPricing(), loadSettings()])
+    .catch(err => console.error('Init error:', err));
+</script>
+</body>
+</html>
