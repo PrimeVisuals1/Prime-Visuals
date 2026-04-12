@@ -74,9 +74,9 @@ nav a:hover::after { width: 100%; }
 .video-card:hover .video-thumb { transform: scale(1.05); }
 .video-thumb-placeholder { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,217,255,0.25) 0%, rgba(0,255,136,0.1) 50%, rgba(20,24,41,0.8) 100%); }
 
-/* Instagram card — iframe approach, hides IG branding */
+/* Instagram card — iframe, hides IG top header + bottom branding */
 .video-card.card-instagram {
-  aspect-ratio: 4/5;
+  aspect-ratio: 9/16;
   cursor: pointer;
 }
 .ig-iframe-wrap {
@@ -89,35 +89,33 @@ nav a:hover::after { width: 100%; }
 }
 .ig-iframe-wrap iframe {
   width: 100%;
-  height: calc(100% + 56px); /* extend down to push IG footer out of view */
+  height: calc(100% + 120px); /* extend to push footer out */
   border: none;
-  margin-top: 0;
+  margin-top: -64px;          /* shift up to hide profile header */
 }
-/* Cover the bottom IG "View more" bar */
+/* Cover top (profile row) and bottom (View more row) */
+.ig-brand-cover-top {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 64px;
+  background: var(--secondary);
+  z-index: 4;
+}
 .ig-brand-cover {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   height: 56px;
   background: var(--secondary);
   z-index: 4;
 }
 
-/* Google Drive card — show placeholder with icon */
+/* Google Drive card — clean dark placeholder */
 .gdrive-thumb {
   position: absolute;
   inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background: linear-gradient(135deg, #0f1b35 0%, #1a2a4a 100%);
-  gap: 0.8rem;
   z-index: 1;
 }
-.gdrive-thumb svg { width: 52px; height: 52px; opacity: 0.7; }
-.gdrive-thumb span { color: var(--text-dim); font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
 
 /* Gradient scrim at bottom */
 .video-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,14,39,0.95) 0%, rgba(10,14,39,0.4) 50%, transparent 100%); }
@@ -496,8 +494,7 @@ function buildVideoCard(v) {
 
   // ── Instagram card — direct iframe embed, IG branding hidden ──────────
   if (parsed?.type === 'instagram') {
-    // Instagram allows embedding via /embed/ URL directly in an iframe
-    const embedSrc = `https://www.instagram.com/p/${parsed.id}/embed/captioned/`;
+    const embedSrc = `https://www.instagram.com/p/${parsed.id}/embed/`;
     const safeTitle2 = (v.title||'').replace(/'/g,'&#39;').replace(/"/g,'&quot;');
     return `
       <div class="video-card card-instagram" onclick="openVideoModal('${(v.videoUrl||'').replace(/'/g,"&#39;")}','${safeTitle2}',${v.views||0},${v.likes||0},'Instagram Reels')">
@@ -509,6 +506,7 @@ function buildVideoCard(v) {
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
           </iframe>
         </div>
+        <div class="ig-brand-cover-top"></div>
         <div class="ig-brand-cover"></div>
         <div class="video-scrim"></div>
         <div class="video-info">
@@ -526,19 +524,8 @@ function buildVideoCard(v) {
   if (parsed?.type === 'youtube') {
     thumbHtml = `<img class="video-thumb" src="${parsed.thumbUrl}" alt="${escHtml(v.title)}" loading="lazy" onerror="this.style.display='none'">`;
   } else if (parsed?.type === 'gdrive') {
-    // Google Drive has no public thumbnail API — show a styled placeholder
-    thumbHtml = `
-      <div class="gdrive-thumb">
-        <svg viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
-          <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
-          <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
-          <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
-          <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
-          <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
-          <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 27h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
-        </svg>
-        <span>Google Drive Video</span>
-      </div>`;
+    // Clean dark placeholder — no text, just gradient background
+    thumbHtml = `<div class="gdrive-thumb"></div>`;
   }
 
   const badgeHtml = (parsed && parsed.label)
@@ -603,16 +590,17 @@ window.openVideoModal = function(url, title, views, likes, platform) {
 
   if (parsed.type === 'instagram') {
     box.className = 'vmodal-box modal-instagram';
-    const igEmbedSrc = `https://www.instagram.com/p/${parsed.id}/embed/captioned/`;
+    const igEmbedSrc = `https://www.instagram.com/p/${parsed.id}/embed/`;
     document.getElementById('vmodalPlayer').innerHTML = `
       <div style="position:absolute;inset:0;overflow:hidden;background:#000;">
         <iframe
           src="${igEmbedSrc}"
-          style="width:100%;height:calc(100% + 56px);border:none;"
+          style="width:100%;height:calc(100% + 120px);border:none;margin-top:-64px;"
           scrolling="no"
           allowtransparency="true"
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
         </iframe>
+        <div style="position:absolute;top:0;left:0;right:0;height:64px;background:#141829;z-index:5;"></div>
         <div style="position:absolute;bottom:0;left:0;right:0;height:56px;background:#141829;z-index:5;"></div>
       </div>`;
   } else {
